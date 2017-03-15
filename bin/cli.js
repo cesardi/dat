@@ -35,6 +35,7 @@ var config = {
     require('../lib/commands/clone'),
     require('../lib/commands/create'),
     require('../lib/commands/doctor'),
+    require('../lib/commands/key'),
     require('../lib/commands/publish'),
     require('../lib/commands/pull'),
     require('../lib/commands/share'),
