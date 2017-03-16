@@ -97,6 +97,21 @@ test('clone - quiet', function (t) {
   st.end()
 })
 
+test('clone - exit', function (t) {
+  var key = new Array(65).join('e')
+  var cmd = dat + ' clone ' + key
+  var st = spawn(t, cmd, {cwd: baseTestDir})
+  st.stdout.match(function (output) {
+    var offlineMsg = output.indexOf('No peers currently online') > -1
+    if (!offlineMsg) return false
+    t.pass('Exits after discovery attempt')
+    st.kill()
+    return true
+  })
+  st.stderr.empty()
+  st.end()
+})
+
 test('clone - dat:// link', function (t) {
   var key = 'dat://' + shareDat.key.toString('hex') + '/'
   var baseDir = path.join(baseTestDir, 'dat_proto_dir')
